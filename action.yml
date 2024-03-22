@@ -1,0 +1,44 @@
+---
+name: Setup Powerpipe
+description: >
+  Install Powerpipe and add it to the PATH.
+author: Turbot
+branding:
+  color: red
+  icon: database
+inputs:
+  powerpipe-version:
+    description: 'Powerpipe CLI version to install. Defaults to "latest". Examples: latest, 0.1.3, 0.5.0.'
+    default: latest
+    required: false
+outputs:
+  powerpipe-version:
+    value: ""
+    description: The version of Powerpipe that was installed.
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Powerpipe
+      shell: bash
+      run: |
+        POWERPIPE_VERSION="${{ inputs.powerpipe-version }}"
+        if [[ -z "$POWERPIPE_VERSION" ]]; then
+          POWERPIPE_VERSION="latest"
+        fi
+        
+        echo "Installing Powerpipe version $POWERPIPE_VERSION"
+
+        curl -sL https://powerpipe.io/install/powerpipe.sh | sudo bash -s -- "v$POWERPIPE_VERSION"
+        echo "Powerpipe has been installed."
+
+
+    - name: Verify Powerpipe Installation and Set Output
+      shell: bash
+      run: |
+        # Running `powerpipe -v` to capture the version
+        POWERPIPE_VERSION_INSTALLED=$(powerpipe -v)
+        echo "Installed Powerpipe version: $POWERPIPE_VERSION_INSTALLED"
+        
+        # Setting the action's output
+        echo "powerpipe-version=$POWERPIPE_VERSION_INSTALLED" >> $GITHUB_OUTPUT
+
