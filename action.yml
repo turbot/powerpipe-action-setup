@@ -23,11 +23,10 @@ runs:
       run: |
         POWERPIPE_VERSION="${{ inputs.powerpipe-version }}"
         if [[ -z "$POWERPIPE_VERSION" || "$POWERPIPE_VERSION" == "latest" ]]; then
-          echo ">>>>>>"
           echo "Installing the latest version of Powerpipe"
           sudo /bin/sh -c "$(curl -fsSL https://powerpipe.io/install/powerpipe.sh)"
         else
-          echo "Installing Powerpipe version $POWERPIPE_VERSION"
+          echo "Installing Powerpipe version v$POWERPIPE_VERSION"
           curl -sL https://powerpipe.io/install/powerpipe.sh | sudo bash -s -- "v$POWERPIPE_VERSION"
         fi
         echo "Powerpipe installation is complete."
