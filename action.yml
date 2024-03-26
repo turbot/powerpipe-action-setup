@@ -22,14 +22,15 @@ runs:
       shell: bash
       run: |
         POWERPIPE_VERSION="${{ inputs.powerpipe-version }}"
-        if [[ -z "$POWERPIPE_VERSION" ]]; then
-          POWERPIPE_VERSION="latest"
+        if [[ -z "$POWERPIPE_VERSION" || "$POWERPIPE_VERSION" == "latest" ]]; then
+          echo ">>>>>>"
+          echo "Installing the latest version of Powerpipe"
+          sudo /bin/sh -c "$(curl -fsSL https://powerpipe.io/install/powerpipe.sh)"
+        else
+          echo "Installing Powerpipe version $POWERPIPE_VERSION"
+          curl -sL https://powerpipe.io/install/powerpipe.sh | sudo bash -s -- "v$POWERPIPE_VERSION"
         fi
-        
-        echo "Installing Powerpipe version $POWERPIPE_VERSION"
-
-        curl -sL https://powerpipe.io/install/powerpipe.sh | sudo bash -s -- "v$POWERPIPE_VERSION"
-        echo "Powerpipe has been installed."
+        echo "Powerpipe installation is complete."
 
 
     - name: Verify Powerpipe Installation and Set Output

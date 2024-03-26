@@ -3,7 +3,19 @@ name: Test Workflow
 on: [push]
 
 jobs:
-  example_job:
+  install_latest_powerpipe:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Powerpipe
+      uses: ./ # This points to your local action
+
+    - name: Verify Powerpipe Installation
+      run: |
+        powerpipe -v
+
+  install_powerpipe_version:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -11,7 +23,7 @@ jobs:
     - name: Setup Powerpipe
       uses: ./ # This points to your local action
       with:
-        powerpipe-version: '0.1.2'
+        powerpipe-version: 0.1.2
 
     - name: Verify Powerpipe Installation
       run: |
