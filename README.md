@@ -1,9 +1,5 @@
 # Setup Powerpipe for GitHub Actions
 
-<p align="center">
-  <a href="https://github.com/turbot/powerpipe-action-setup/actions"><img alt="powerpipe-action status" src="https://github.com/turbot/powerpipe-action-setup/workflows/units-test/badge.svg"></a>
-</p>
-
 This action installs [Powerpipe](https://github.com/turbot/powerpipe/).
 
 ## Usage
