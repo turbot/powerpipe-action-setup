@@ -4,7 +4,7 @@ description: >
   Install Powerpipe and add it to the PATH.
 author: Turbot
 branding:
-  color: red
+  color: green
   icon: shield
 inputs:
   powerpipe-version:
