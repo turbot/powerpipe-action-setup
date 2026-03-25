@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   install-latest-powerpipe:
     runs-on: ubuntu-latest
